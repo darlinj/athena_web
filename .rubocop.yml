@@ -1,0 +1,15 @@
+---
+AllCops:
+  DisplayCopNames: true
+  Exclude: 
+    - "db/*"
+    - "config/**/*"
+    - "bin/**/*"
+    - "script/*"
+    - "spec/*_helper.rb"
+    - "features/support/env.rb"
+    - "db/migrate/*"
+    - "lib/tasks/*"
+    - "scripts/*"
+Style/Documentation:
+  Enabled: false
