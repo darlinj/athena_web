@@ -22,6 +22,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'capybara-screenshot'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'listen', '>= 3.0.5', '< 3.2'
@@ -29,8 +30,8 @@ group :development do
   gem 'rubocop', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'webmock'
   gem 'web-console', '>= 3.3.0'
+  gem 'webmock'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
