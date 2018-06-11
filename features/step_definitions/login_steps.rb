@@ -14,7 +14,7 @@ When('I log in') do
 end
 
 Then('I am successfully logged in') do
-  expect(page).to have_content('logged in')
+  expect(page).to have_content('logout')
 end
 
 Then('I am associated with my company') do
@@ -27,7 +27,7 @@ Given('I am an admin user') do
 end
 
 When('I create a normal user') do
-  visit '/user/new'
+  visit '/users/new'
   fill_in('Email', with: 'barney@example.com')
   fill_in('Company', with: 'Acme corp')
   select('Normal user', from: 'User type')
@@ -43,7 +43,7 @@ Given('there is an admin user') do
 end
 
 When('a user is created by an admin') do
-  visit '/user/new'
+  visit '/users/new'
   fill_in('Email', with: 'barney@example.com')
   fill_in('Company', with: 'Acme corp')
   select('Normal user', from: 'User type')
