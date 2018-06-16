@@ -21,21 +21,28 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
+	    </li>
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+	      </li>
+            <% end %>
           </ul>
 	</div>
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <% if user_signed_in? %>
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "Invite someone", new_user_invitation_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
                 <%= link_to :logout, destroy_user_session_path, method: :delete, class: "nav-link" %>
-              <% else %>
+              </li>
+            <% else %>
+              <li class="nav-item">
                 <%= link_to :login, new_user_session_path , class: "nav-link" %>
-              <% end %>
-            </li>
+              </li>
+            <% end %>
           </ul>
         </div>
       </nav>

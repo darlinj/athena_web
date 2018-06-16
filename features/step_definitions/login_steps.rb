@@ -26,38 +26,27 @@ Given('I am an admin user') do
   login admin_user
 end
 
-When('I create a normal user') do
-  visit '/users/new'
-  fill_in('Email', with: 'barney@example.com')
-  fill_in('Company', with: 'Acme corp')
-  select('Normal user', from: 'User type')
-  click_button('Create')
+When("I invite a new user to use the website") do
+  clear_emails
+  visit('/')
+  click_link('Invite someone')
+  fill_in('Email', with: 'bod.roundyperson@example.com')
+  click_button('Send an invitation')
 end
 
-Then('I should see that normal user has been created') do
-  expect(page).to have_content('User has been created')
+Then("the new user should get an email invitation") do
+  open_email('bod.roundyperson@example.com')
+  expect(current_email).to have_content('Hello bod.roundyperson@example.com')
 end
 
-Given('there is an admin user') do
-  create :admin_user
+Then("should be able to set their password") do
+  current_email.click_link('Accept invitation')
+  fill_in('Password', with: 'secret')
+  fill_in('Password confirmation', with: 'secret')
+  click_button('Set my password')
 end
 
-When('a user is created by an admin') do
-  visit '/users/new'
-  fill_in('Email', with: 'barney@example.com')
-  fill_in('Company', with: 'Acme corp')
-  select('Normal user', from: 'User type')
-  click_button('Create')
+Then("should be logged in") do
+  expect(page).to have_content('logout')
 end
 
-Then('the user should get a notification') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then('the user should be able to confirm') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then('the user should be able to login') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
