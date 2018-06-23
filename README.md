@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+*Athena application.
 
 Things you may want to cover:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
 * Deployment instructions
 
-* ...
+Make sure you have ansible installed.
+
+Deploy a Ubuntu box (on AWS use ami-58d7e821)
+
+Need to allow port 22 and port 80 on the security group
+
+Make sure it has a public IP address and internet gateway.  You should be able to SSH to this.
+
+Set the URI in the hosts.txt file under [appservers] (copy the host.txt.example file for layhout)
+
+Then run
+ansible-playbook -i install/hosts.txt install/ansible_install.yml --key-file "~/.ssh/yourkey.pem"
+
+

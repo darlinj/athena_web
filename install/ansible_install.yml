@@ -1,0 +1,28 @@
+---
+  - name: Deploy rails, postgres, nginx etc
+    hosts: appservers
+    remote_user: ubuntu
+    become_method: sudo
+    become_user: root
+
+    tasks:
+    - name: Add google DNS
+      become: true
+      lineinfile:
+        dest: /etc/network/interfaces.d/50-cloud-init.cfg
+        line: 'dns-nameservers 8.8.8.8'
+    - name: Update all packages to the latest version
+      apt:
+        upgrade: dist
+    - name: uname
+      shell: uname -a
+      register: output
+    - name: debug
+      debug: msg="{{ output }}"
+
+    roles:
+    - zzet.postgresql
+    - ansible-rbenv-role
+    - geerlingguy.nginx
+    - setup-unicorn
+
