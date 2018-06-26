@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 Given('I am an Athena web user') do
-  create :user, email: 'fred@bt.com', password: 'secret'
+  @current_user = create :user
   mock_user_via_api
 end
 
 When('I log in') do
   visit('/')
   click_link('login')
-  fill_in('Email', with: 'fred@bt.com')
-  fill_in('Password', with: 'secret')
+  fill_in('Email', with: @current_user.email)
+  fill_in('Password', with: @current_user.password)
   click_button('Log in')
 end
 
@@ -18,12 +18,13 @@ Then('I am successfully logged in') do
 end
 
 Then('I am associated with my company') do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_content(@current_user.company.name)
 end
 
 Given('I am an admin user') do
   admin_user = create :admin_user
   login admin_user
+  @current_company = create :company
 end
 
 When('I invite a new user to use the website') do
@@ -31,6 +32,7 @@ When('I invite a new user to use the website') do
   visit('/')
   click_link('Invite someone')
   fill_in('Email', with: 'bod.roundyperson@example.com')
+  select(@current_company.name, from: 'Company')
   click_button('Send an invitation')
 end
 

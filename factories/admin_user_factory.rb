@@ -2,8 +2,9 @@
 
 FactoryBot.define do
   factory :admin_user, class: :user do
-    email 'fred.flintstone@bt.com'
-    password 'password'
+    email Faker::Internet.email
+    password Faker::Internet.password
+    company
     admin true
   end
 end
