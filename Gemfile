@@ -35,6 +35,7 @@ group :development do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'rails_real_favicon'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'spring'
