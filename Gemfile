@@ -28,6 +28,9 @@ group :development, :test do
 end
 
 group :development do
+  gem 'capistrano', '~> 3.10'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
   gem 'capybara-screenshot'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'

@@ -8,6 +8,7 @@
   when: nginx_ppa_use
 
 - name: Ensure nginx will reinstall if the PPA was just added.
+  become: true
   apt:
     name: nginx
     state: absent

@@ -1,6 +1,6 @@
 ---
-  - name: Deploy rails, postgres, nginx etc
-    hosts: appservers
+  - hosts: all
+    gather_facts: False
     remote_user: ubuntu
     become_method: sudo
     become_user: root
@@ -8,10 +8,21 @@
     tasks:
     - name: Add google DNS
       become: true
-      lineinfile:
-        dest: /etc/network/interfaces.d/50-cloud-init.cfg
-        line: 'dns-nameservers 8.8.8.8'
+      raw: echo "dns-nameservers 8.8.8.8" >> /etc/network/interfaces.d/50-cloud-init.cfg && ifdown eth0 && sudo ifup eth0
+    - name: install python 2
+      become: true
+      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
+  - name: Deploy rails, postgres, nginx etc
+    hosts: appservers
+    remote_user: ubuntu
+    become_method: sudo
+    become_user: root
+    become: true
+
+    tasks:
     - name: Update all packages to the latest version
+      become: true
       apt:
         upgrade: dist
     - name: uname
