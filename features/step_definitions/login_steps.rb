@@ -26,7 +26,7 @@ Given('I am an admin user') do
   login admin_user
 end
 
-When("I invite a new user to use the website") do
+When('I invite a new user to use the website') do
   clear_emails
   visit('/')
   click_link('Invite someone')
@@ -34,19 +34,18 @@ When("I invite a new user to use the website") do
   click_button('Send an invitation')
 end
 
-Then("the new user should get an email invitation") do
+Then('the new user should get an email invitation') do
   open_email('bod.roundyperson@example.com')
   expect(current_email).to have_content('Hello bod.roundyperson@example.com')
 end
 
-Then("should be able to set their password") do
+Then('should be able to set their password') do
   current_email.click_link('Accept invitation')
   fill_in('Password', with: 'secret')
   fill_in('Password confirmation', with: 'secret')
   click_button('Set my password')
 end
 
-Then("should be logged in") do
+Then('should be logged in') do
   expect(page).to have_content('logout')
 end
-

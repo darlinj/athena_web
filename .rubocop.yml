@@ -11,5 +11,6 @@ AllCops:
     - "db/migrate/*"
     - "lib/tasks/*"
     - "scripts/*"
+    - "install/**/*"
 Style/Documentation:
   Enabled: false

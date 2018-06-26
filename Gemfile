@@ -22,8 +22,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
 
 group :development, :test do
-  gem 'capybara-email'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'capybara-email'
   gem 'factory_bot_rails'
 end
 
